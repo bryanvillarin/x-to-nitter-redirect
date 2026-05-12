@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         X.com → Nitter redirect (with fallbacks)
 // @namespace    https://github.com/bryanvillarin/x-to-nitter-redirect
-// @version      1.0.0
+// @version      1.1.0
 // @description  Redirect x.com and twitter.com URLs to a Nitter instance (default: xcancel.com), with fallback cycling and a menu toggle.
 // @author       Bryan Villarin
 // @homepage     https://bryanvillarin.link
@@ -10,6 +10,8 @@
 // @match        *://*.x.com/*
 // @match        *://twitter.com/*
 // @match        *://*.twitter.com/*
+// @exclude      *://x.com/i/*
+// @exclude      *://twitter.com/i/*
 // @run-at       document-start
 // @updateURL     https://raw.githubusercontent.com/bryanvillarin/x-to-nitter-redirect/main/x-to-nitter-redirect.user.js
 // @downloadURL   https://raw.githubusercontent.com/bryanvillarin/x-to-nitter-redirect/main/x-to-nitter-redirect.user.js

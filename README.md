@@ -54,12 +54,14 @@ Bookmark [status.d420.de](https://status.d420.de/) for live instance health. To 
 | **Instance downtime** | Nitter instances depend on rotating X session tokens and can go offline without warning. Cycle to a fallback via the menu, or disable temporarily. |
 | **No SPA interception** | The script only fires on full page loads, not in-page navigation within x.com. Not relevant for the typical use case of clicking a tweet link from outside. |
 | **Subdomains excluded** | Only the hosts in the allowlist are redirected. `help.x.com`, `developer.x.com`, etc. are left alone by design. |
+| **`/i/` paths excluded** | URLs under `x.com/i/` — Articles, Spaces, live broadcasts, and OAuth flows — are intentionally skipped. Nitter can't render any of them, and redirecting OAuth flows would silently break X login. |
 
 ## Version History
 
 | Version | Changes |
 |---------|---------|
-| **1.0** | Initial release — redirects `x.com` / `twitter.com` / `www.` / `mobile.` variants to a Nitter instance. Menu toggle for enable/disable. Cycle-through support for five verified fallback instances. Persistent state via `GM_setValue`. |
+| **1.1.0** | Added `@exclude` rules for `x.com/i/*` and `twitter.com/i/*` to skip X Articles, Spaces, broadcasts, and OAuth flows that Nitter cannot render. |
+| **1.0.0** | Initial release — redirects `x.com` / `twitter.com` / `www.` / `mobile.` variants to a Nitter instance. Menu toggle for enable/disable. Cycle-through support for five verified fallback instances. Persistent state via `GM_setValue`. |
 
 ## Contributing
 
@@ -70,7 +72,7 @@ Found a bug? Have an idea?
 
 ## License
 
-MIT License — see the script header for details.
+[MIT License](LICENSE)
 
 ---
 
