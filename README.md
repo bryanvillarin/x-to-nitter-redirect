@@ -7,7 +7,7 @@ Includes a Tampermonkey menu for toggling the redirect and cycling through fallb
 ## How It Works
 
 1. **Matches** `x.com`, `twitter.com`, and their `www.` / `mobile.` variants.
-2. **Redirects** the full URL — path, query string, and hash — to the currently selected Nitter instance.
+2. **Redirects** to the currently selected Nitter instance — path and hash only. Media-embed suffixes (`/video/1`, `/photo/2`, `/card/`) and query strings (`?s=46` and similar tracking params) are stripped, since Nitter doesn't support them and some instances return a `403` when they're present.
 3. **Runs at `document-start`** to minimize any flash of the original X page.
 4. **Uses `window.location.replace()`** so the `x.com` URL doesn't pollute browser history.
 
@@ -60,6 +60,7 @@ Bookmark [status.d420.de](https://status.d420.de/) for live instance health. To 
 
 | Version | Changes |
 |---------|---------|
+| **1.2.0** | Strip media-embed path suffixes (`/video/N`, `/photo/N`, `/card/`) and query strings before redirecting. Fixes `403` errors on xcancel.com when clicking video links shared from Slack or other apps. |
 | **1.1.0** | Added `@exclude` rules for `x.com/i/*` and `twitter.com/i/*` to skip X Articles, Spaces, broadcasts, and OAuth flows that Nitter cannot render. |
 | **1.0.0** | Initial release — redirects `x.com` / `twitter.com` / `www.` / `mobile.` variants to a Nitter instance. Menu toggle for enable/disable. Cycle-through support for five verified fallback instances. Persistent state via `GM_setValue`. |
 

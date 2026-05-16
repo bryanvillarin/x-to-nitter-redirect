@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         X.com → Nitter redirect (with fallbacks)
 // @namespace    https://github.com/bryanvillarin/x-to-nitter-redirect
-// @version      1.1.0
+// @version      1.2.0
 // @description  Redirect x.com and twitter.com URLs to a Nitter instance (default: xcancel.com), with fallback cycling and a menu toggle.
 // @author       Bryan Villarin
 // @homepage     https://bryanvillarin.link
@@ -93,10 +93,14 @@
     if (!enabled) return;
     if (!REDIRECTABLE_HOSTS.includes(host)) return;
 
-    const newUrl = 'https://' + currentInstance +
-                   window.location.pathname +
-                   window.location.search +
-                   window.location.hash;
+    // Strip media-embed suffixes Nitter doesn't support (e.g. /video/1, /photo/2).
+    // Also drop the query string (?s=46 and similar tracking params) — Nitter
+    // doesn't need them, and they're what caused the 403 on xcancel.com.
+    const cleanPath = window.location.pathname
+        .replace(/\/(video|photo|card)\/\d*/i, '')
+        .replace(/\/+$/, '');
+
+    const newUrl = 'https://' + currentInstance + cleanPath + window.location.hash;
 
     // replace() avoids polluting browser history with the x.com URL
     window.location.replace(newUrl);
